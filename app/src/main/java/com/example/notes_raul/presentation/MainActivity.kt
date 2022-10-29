@@ -1,12 +1,13 @@
 package com.example.notes_raul.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes_raul.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +21,11 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.noteList.observe(this) {
             noteListAdapter.submitList(it)
+        }
+        val buttonAddNote = findViewById<FloatingActionButton>(R.id.button_add_note)
+        buttonAddNote.setOnClickListener {
+            val intent = NoteItemActivity.newIntentAdd(this)
+            startActivity(intent)
         }
     }
 
@@ -55,6 +61,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupClickListener() {
         noteListAdapter.onNoteClickListener = {
             Log.d("Main", it.toString())
+            val intent = NoteItemActivity.newIntentEdit(this, it.id)
+            startActivity(intent)
         }
     }
 

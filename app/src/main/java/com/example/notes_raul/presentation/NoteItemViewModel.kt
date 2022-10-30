@@ -83,10 +83,10 @@ class NoteItemViewModel : ViewModel() {
     }
 
     fun resetErrorInputText() {
-        _errorInputText.value = true
+        _errorInputText.value = false
     }
 
     fun resetErrorInputDate() {
-        _errorInputDate.value = true
+        _errorInputDate.value = false
     }
 }

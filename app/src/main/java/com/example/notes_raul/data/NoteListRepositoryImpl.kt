@@ -14,7 +14,7 @@ object NoteListRepositoryImpl : NoteListRepository {
     private var autoIncrementID = 0
 
     init {
-        for (i in 0 until 10) {
+        for (i in 0 until 0) {
             val item = Note("Text $i", "$i")
             addNote(item)
         }

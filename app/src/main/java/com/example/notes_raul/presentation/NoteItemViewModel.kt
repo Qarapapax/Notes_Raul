@@ -1,5 +1,7 @@
 package com.example.notes_raul.presentation
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,9 +11,9 @@ import com.example.notes_raul.domain.EditNoteUseCase
 import com.example.notes_raul.domain.GetNoteUseCase
 import com.example.notes_raul.domain.Note
 
-class NoteItemViewModel : ViewModel() {
+class NoteItemViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = NoteListRepositoryImpl
+    private val repository = NoteListRepositoryImpl(application)
     private val getNoteUseCase = GetNoteUseCase(repository)
     private val addNoteUseCase = AddNoteUseCase(repository)
     private val editNoteUseCase = EditNoteUseCase(repository)

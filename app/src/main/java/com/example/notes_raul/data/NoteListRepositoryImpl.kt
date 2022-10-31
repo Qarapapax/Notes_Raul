@@ -1,57 +1,36 @@
 package com.example.notes_raul.data
 
+import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.example.notes_raul.domain.Note
 import com.example.notes_raul.domain.NoteListRepository
-import java.lang.RuntimeException
 
-object NoteListRepositoryImpl : NoteListRepository {
+class NoteListRepositoryImpl(application: Application) : NoteListRepository {
 
-    private val noteListLD = MutableLiveData<List<Note>>()
-    private val noteList = mutableListOf<Note>()
+    private val noteListDao = AppDataBase.getDBase(application).getDao()
+    private val mapper = NoteListMapper()
 
-    private var autoIncrementID = 0
-
-    init {
-        for (i in 0 until 0) {
-            val item = Note("Text $i", "$i")
-            addNote(item)
-        }
-    }
 
     override fun addNote(note: Note) {
-        if (note.id == Note.UNDEFINED_ID) {
-            note.id = autoIncrementID++
-        }
-        noteList.add(note)
-        updateList()
+        noteListDao.addNote(mapper.mapEntityToDBModel(note))
     }
 
     override fun deleteNote(note: Note) {
-        noteList.remove(note)
-        updateList()
+        noteListDao.deleteNote(note.id)
     }
 
     override fun editNote(note: Note) {
-        val oldElement = getNote(note.id)
-        noteList.remove(oldElement)
-        addNote(note)
+        noteListDao.addNote(mapper.mapEntityToDBModel(note))
     }
 
     override fun getNote(noteId: Int): Note {
-        return noteList.find {
-            it.id == noteId
-        } ?: throw RuntimeException("Element with id $noteId not found")
+        val dbModel = noteListDao.getNote(noteId)
+        return mapper.mapDBModelToEntity(dbModel)
     }
 
-    override fun getNoteList(): LiveData<List<Note>> {
-        return noteListLD
-    }
-
-    private fun updateList() {
-        noteListLD.value = noteList.toList()
-    }
-
-
+    override fun getNoteList(): LiveData<List<Note>> =
+        Transformations.map(noteListDao.getNoteList()) {
+            mapper.mapListDBModelToEntity(it)
+        }
 }

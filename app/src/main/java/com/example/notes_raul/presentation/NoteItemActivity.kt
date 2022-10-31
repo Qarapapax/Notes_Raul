@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.notes_raul.R
+import com.example.notes_raul.data.AppDataBase
 import com.example.notes_raul.domain.Note
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
@@ -34,6 +35,7 @@ class NoteItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_item)
+
         parseIntent()
         viewModel = ViewModelProvider(this)[NoteItemViewModel::class.java]
         initViews()
@@ -125,7 +127,7 @@ class NoteItemActivity : AppCompatActivity() {
         }
     }
 
-    private fun launchAddMode() {
+    fun launchAddMode() {
         buttonSave.setOnClickListener {
             viewModel.addNote(edText.text?.toString(), tvDate.text?.toString())
         }

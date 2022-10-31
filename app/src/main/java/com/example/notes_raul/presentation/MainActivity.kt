@@ -1,12 +1,12 @@
 package com.example.notes_raul.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes_raul.R
+import com.example.notes_raul.data.AppDataBase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupClickListener() {
         noteListAdapter.onNoteClickListener = {
-            Log.d("Main", it.toString())
             val intent = NoteItemActivity.newIntentEdit(this, it.id)
             startActivity(intent)
         }

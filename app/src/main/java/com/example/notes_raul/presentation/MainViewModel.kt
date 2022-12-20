@@ -22,5 +22,4 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteNote(note: Note) {
         deleteNoteUseCase.deleteNote(note)
     }
-
 }

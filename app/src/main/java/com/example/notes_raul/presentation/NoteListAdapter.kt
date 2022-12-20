@@ -11,7 +11,7 @@ import com.example.notes_raul.domain.Note
 
 class NoteListAdapter : ListAdapter<Note, NoteItemViewHolder>(NoteItemDiffCallBack()) {
 
-    var onNoteClickListener: ((Note) -> Unit)? = null
+    var  onNoteClickListener: ((Note) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder  {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -28,6 +28,6 @@ class NoteListAdapter : ListAdapter<Note, NoteItemViewHolder>(NoteItemDiffCallBa
             onNoteClickListener?.invoke(note)
         }
         viewHolder.tvText.text = note.text
-        viewHolder.tvDate.text = note.date.toString()
+        viewHolder.tvDate.text = note.date
     }
 }

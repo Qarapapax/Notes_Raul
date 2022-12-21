@@ -5,11 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.notes_raul.domain.Note
 import com.example.notes_raul.domain.NoteListRepository
+import javax.inject.Inject
 
-class NoteListRepositoryImpl(application: Application) : NoteListRepository {
-
-    private val noteListDao = AppDataBase.getDBase(application).getDao()
-    private val mapper = NoteListMapper()
+class NoteListRepositoryImpl @Inject constructor(
+    private val noteListDao: NotesDao,
+    private val mapper: NoteListMapper
+) : NoteListRepository {
 
 
     override fun addNote(note: Note) {

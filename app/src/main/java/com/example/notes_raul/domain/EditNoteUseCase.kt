@@ -1,6 +1,11 @@
 package com.example.notes_raul.domain
 
-class EditNoteUseCase(private val noteListRepository: NoteListRepository) {
+import javax.inject.Inject
+
+class EditNoteUseCase@Inject constructor(
+    private val noteListRepository: NoteListRepository
+) {
+
     fun editNote(note: Note) {
         noteListRepository.editNote(note)
     }

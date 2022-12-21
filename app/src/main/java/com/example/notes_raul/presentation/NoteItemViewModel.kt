@@ -1,6 +1,7 @@
 package com.example.notes_raul.presentation
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,13 +11,13 @@ import com.example.notes_raul.domain.AddNoteUseCase
 import com.example.notes_raul.domain.EditNoteUseCase
 import com.example.notes_raul.domain.GetNoteUseCase
 import com.example.notes_raul.domain.Note
+import javax.inject.Inject
 
-class NoteItemViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository = NoteListRepositoryImpl(application)
-    private val getNoteUseCase = GetNoteUseCase(repository)
-    private val addNoteUseCase = AddNoteUseCase(repository)
-    private val editNoteUseCase = EditNoteUseCase(repository)
+class NoteItemViewModel @Inject constructor(
+    private val getNoteUseCase: GetNoteUseCase,
+    private val addNoteUseCase: AddNoteUseCase,
+    private val editNoteUseCase: EditNoteUseCase
+) : ViewModel() {
 
     private var _errorInputText = MutableLiveData<Boolean>()
     val errorInputText: LiveData<Boolean>

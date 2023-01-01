@@ -2,6 +2,7 @@ package com.example.notes_raul.di
 
 import android.app.Application
 import com.example.notes_raul.presentation.MainActivity
+import com.example.notes_raul.presentation.MainFragment
 import com.example.notes_raul.presentation.NoteItemActivity
 import dagger.Binds
 import dagger.BindsInstance
@@ -16,7 +17,7 @@ import dagger.Component
 )
 interface ApplicationComponent {
 
-    fun inject(activity: MainActivity)
+    fun inject(fragment: MainFragment)
 
     fun inject(activity: NoteItemActivity)
 

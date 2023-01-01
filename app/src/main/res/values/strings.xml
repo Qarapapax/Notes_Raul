@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Notes_Raul</string>
-        <string name="text_hint">Заметка:</string>
-        <string name="count_hint">Count:</string>
-        <string name="save_btn">Сохранить</string>
-        <string name="error_input_text">Заметка не введана</string>
-        <string name="error_input_date">Дата не введена</string>
+    <string name="text_hint">Заметка:</string>
+    <string name="count_hint">Count:</string>
+    <string name="save_btn">Сохранить</string>
+    <string name="error_input_text">Заметка не введана</string>
+    <string name="error_input_date">Дата не введена</string>
     <string name="date_picker_btn">Выбрать дату</string>
     <string name="tv_date">Дата</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

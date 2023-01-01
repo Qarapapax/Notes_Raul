@@ -17,6 +17,7 @@ import com.example.notes_raul.domain.Note
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 class NoteItemActivity : AppCompatActivity() {
 
@@ -32,12 +33,21 @@ class NoteItemActivity : AppCompatActivity() {
     private var screenMode = MODE_UNKNOWN
     private var noteItemId = Note.UNDEFINED_ID
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (application as NoteApplication).component
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_item)
 
         parseIntent()
-        viewModel = ViewModelProvider(this)[NoteItemViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[NoteItemViewModel::class.java]
         initViews()
         addTextChangeListeners()
         launchRightMode()
